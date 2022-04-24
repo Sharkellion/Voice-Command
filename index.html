@@ -1,0 +1,143 @@
+
+
+<html>
+
+
+<head>
+
+
+<title>Voice Command Canvas</title>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+
+</head>
+
+
+
+
+
+
+<body>
+
+
+<h3>Voice Command Canvas</h3>
+
+
+
+
+
+
+<span id="status"></span>
+
+
+<button onclick="start();" class="btn btn-success">Draw</button>
+<br><br>
+<style>
+body
+{
+	text-align: center;
+}
+span
+{
+	font-size: 12px;
+	color: red;
+}
+canvas
+{
+	background: pink;
+	border-radius: 20px;
+}
+
+
+</style>
+
+<script>
+x=0;
+y=0;
+screen_width=0;
+screen_height=0;
+draw_apple="";
+apple="";
+speak_data="";
+to_number=0;
+function preload(){
+    apple=loadImage("mourningdove.png");
+}
+var SpeechRecognition=window.webkitSpeechRecognition;
+var recognition new SpeechRecognition();
+function start
+{
+    document.getElementById("status").innerHTML="System is listening please say a number";
+recognition.start();
+}
+recognition.onresult=function(event){
+    console.log(event);
+    content=event.results[0][0].transcript;
+    document.getElementById("status").innerHTML="The speech has been recognized";
+    to_number=Number(content);
+    if(Number.isInteger(to_number))
+}
+document.getElementById("status").innerHTML="Started drawing apple";
+draw_apple="set";
+}
+else{
+    document.getElementById("status").innerHTML="The speech has not been recognized");
+}
+}
+function setup(){
+    screen_width=window.innerWidth;
+    screen_height=window.innerHeight;
+    canvas=createCanvas(screen_width,screen_height-150);
+    canvas.position(0,150);
+}
+function  draw(){
+    if(draw_apple=="set"){
+        for(var i=1;i<= to_number; i++)
+        {
+            x=Math.floor(Math.random()*700);
+            y=Math.floor(Math.random()*700);
+            image(apple, x, y, 50, 50);
+        }
+        document.getElementById("status").innerHTML=to_number+"Apples drawn':
+        speak)data=to_number+"Apples drawn";
+     speak();
+     draw_apple="";
+    }
+}
+function speak(){
+    var synth=window.speechSynthesis;
+    var utterThis=new SpeechSynthesisUtterance(speak_data);
+    synth.speak(utterThis);
+    speak_data="";
+}
+</script>
+</body>
+</html>
+
+
+
